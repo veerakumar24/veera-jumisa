@@ -90,9 +90,6 @@ Here the deployment java and react application contains the ansible configuratio
 
 
 
-
-
-
         
 
 
