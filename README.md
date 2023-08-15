@@ -131,29 +131,29 @@ Here the deployment java and react application contains the ansible configuratio
 
 ## BackendService.yaml file
 
-    ---
-    -name: create backend app folder
-      file:
-        path: /opt/java-backend/
-        state: directory
-        owner: www-data
-        group: root
-        node: '0774'
-    
-    -name: copy app_ems.service to /etc/systemd/system/
-      file:
-        src: app_ems.service
-        dest: /etc/system/system/app_ems.service
-        owner: root
-        group: root
-        node: '0775'
-    
-    -name: Download backend
-      get_url:
-        url: https://artifactory.mgmt.dreamteamit.in/artifactory/ems-veera/ems-v/backend/springboot-backend-100.jar
-        dest: /opt/java-backend
-        url_username: veerakumar
-        url_password: '{{ ( "BackendService_password") }}'
+     ---
+     -name: create backend app folder
+       file:
+         path: /opt/java-backend/
+         state: directory
+         owner: www-data
+         group: root
+         node: '0774'
+     
+     -name: copy app_ems.service to /etc/systemd/system/
+       file:
+         src: app_ems.service
+         dest: /etc/system/system/app_ems.service
+         owner: root
+         group: root
+         node: '0775'
+     
+     -name: Download backend
+       get_url:
+         url: https://artifactory.mgmt.dreamteamit.in/artifactory/ems-veera/ems-v/backend/springboot-backend-100.jar
+         dest: /opt/java-backend
+         url_username: veerakumar
+         url_password: '{{ ( "BackendService_password") }}'
 
 ## FontendService.yaml
 
