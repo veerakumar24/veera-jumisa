@@ -7,10 +7,8 @@
  - Playbooks used to automate everything form system configuration to complex multi-step process, playbooks are written in YAML format.    
  - It consists of a set of tasks used to configure a host to server. Ansible manages the machines in agent-less mannner.
 
-![image](https://github.com/veerakumar24/veera-jumisa/assets/130571444/0bd85b8a-a086-4f5f-a326-c68406cd4ba3)
+![image](https://github.com/veerakumar24/terraform/assets/130571444/ee24ef28-2b5b-4ffe-836e-b9dc424de744)
 
-
- 
 # Anisble installation
 You can install a released version of Ansible with pip or a package manager. For details on installing Ansible on a variety of platforms: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
@@ -52,7 +50,6 @@ This project aims to streamline the deployment process of a complex web applicat
 
 ![Screenshot from 2023-08-13 16-35-58](https://github.com/veerakumar24/terraform/assets/130571444/f89678fc-772e-4665-9280-1089db95b9b7)
 
-
 # Deployment Process
 Here the deployment java and react application contains the ansible configuration files ex:
 - In installed ansible machine will have the dependencies files are ansible.cfg, main.yml and inventory.ini 
@@ -63,34 +60,126 @@ Here the deployment java and react application contains the ansible configuratio
 - In Ansible main.yml commonly used to organize tasks ans roles within a playbook.
 - The main.yml file serves as an entry point to define the core tasks of the roles.
 
-![Screenshot from 2023-08-13 20-36-57](https://github.com/veerakumar24/terraform/assets/130571444/b2857c70-22ee-4c49-a426-d9e7e643c501)
+      ---
+      - hosts: ec2_instance
+        pre_tasks:
+          - name: apt update
+            apt:
+              update_cache: yes
+        tasks:
+          - name: install Java
+            apt:
+              name: openjdk-17-jdk  
+              state: present
+        roles:
+          - app-server
 
 ## Ansible.cfg File
 - In ansible.cfg file that allows various option during in deployment stages are setting the defaults optins, enabling the SSH conncection, mainly specifing the roles path.
 - The default ansible configuration file which is located under the /etc/ansible/ansible.cfg.
 - In ansible configuration file has many parameters like inventory file location, library location, modules and etc,.
 
-![Screenshot from 2023-08-13 20-37-22](https://github.com/veerakumar24/terraform/assets/130571444/32b7635c-af73-46f9-8dc1-ce5b2e2cf170)
+       [defaults]
+       ansible_managed = Ansible managed: {file} modified on %Y-%m-%d %H:%M:%S by {uid} on {host}
+       ansible_ssh_private_key_file = /home/ubuntu/
+       roles_path    = roles
+       host_key_checking = False
+       remote_user = ubuntu
+       command_warnings=False
+       #vault_password_file = .vault_pass
+       [inventory]
+       enable_plugins = yaml, ini
+       
+       [privilege_escalation]
+       become=True
+       become_method=sudo
+       become_user=root
+       #become_ask_pass=False
+       
+       [paramiko_connection]
+       
+       [ssh_connection]
+       ssh_args = -C -o ControlMaster=auto -o ControlPersist=60s -o ForwardAgent=yes
+       control_path = /tmp/ansible-ssh-%%h-%%p-%%r
+       pipelining = True
+       scp_if_ssh = True
+       
+       [persistent_connection]
+       
+       [accelerate]
+       
+       [selinux]
+       
+       [colors]
+       
+       [diff]
+       always = yes
+       context = 10
 
 ## Inventory.ini File
 - Inventory file is used to define the hosts and groups of hosts on which you want to perform operations or deployments.
 - The inventory file can be stored in two formats: INI and YAML. The default location of the inventory file is/etc/ansible/hosts.
 - Mainly defining the hosts and groups and Connection information.
-
-![Screenshot from 2023-08-13 20-37-05](https://github.com/veerakumar24/terraform/assets/130571444/aa6e564c-7ff1-4054-bb47-5717bbcd3c33)
+  
+      [ec2]
+      ec2_instance ansible_host=44.211.207.93
 
 ## Backend and Frontend Deployment File
 - In tasks folder having the backend path and frontend path wich is stored in the /opt/java-backend/ for Java Springboot and /opt/react-frontend for React Nodejs.
 - In deployment process our backend and frontend code were stored in jfrog artifactory in ansible deployment stage we were using the username and token for download the build and un-zip file.
 
-![Screenshot from 2023-08-13 21-21-47](https://github.com/veerakumar24/terraform/assets/130571444/8843554a-4e50-4885-b57f-f2b2a297a93a)
+## BackendService.yaml file
+
+    ---
+    -name: create backend app folder
+      file:
+        path: /opt/java-backend/
+        state: directory
+        owner: www-data
+        group: root
+        node: '0774'
+    
+    -name: copy app_ems.service to /etc/systemd/system/
+      file:
+        src: app_ems.service
+        dest: /etc/system/system/app_ems.service
+        owner: root
+        group: root
+        node: '0775'
+    
+    -name: Download backend
+      get_url:
+        url: https://artifactory.mgmt.dreamteamit.in/artifactory/ems-veera/ems-v/backend/springboot-backend-100.jar
+        dest: /opt/java-backend
+        url_username: veerakumar
+        url_password: cmVmdGtuOjAxOjE3MjMzODg5ODM6NEVpZENCdEQ0aVRTU3lWelVla2xuRTdCaFV3
+
+## FontendService.yaml
+
+      ---
+      -name: create frontend app folder
+        file:
+          path: /opt/react-backend/
+          state: directory
+          owner: www-data
+          group: root
+          node: '0774'
+      
+      -name: copy reactapp_ems.service to /etc/systemd/system/
+        file:
+          src: reactapp_ems.service
+          dest: /etc/system/system/app_ems.service
+          owner: root
+          group: root
+          node: '0775'
+      
+      -name: Download frontendend
+        get_url:
+          url: https://artifactory.mgmt.dreamteamit.in/artifactory/ems-veera/ems-v/backend/springboot-backend-100.jar
+          dest: /opt/react-frontend
+          url_username: veerakumar
+          url_password: nebffnenioenoencnekdenknoieh3oswiehurhuibopasobpdudhqopheopfheuiowfhpuihbuifhpuifbcwpe
 
 ## output 
 
-![Screenshot from 2023-08-12 21-05-07](https://github.com/veerakumar24/terraform/assets/130571444/e6e527da-6ac2-4545-ad46-0d34f033c9d4)
-
-
-
-        
-
-
+![image](https://github.com/veerakumar24/terraform/assets/130571444/0acfdce8-3ab6-492f-a6b5-7c566acd7c92)
