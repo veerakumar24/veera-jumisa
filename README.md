@@ -49,7 +49,7 @@ This project aims to streamline the deployment process of a complex web applicat
 
 # Directory Structure
 
-![Screenshot from 2023-08-13 16-35-58](https://github.com/veerakumar24/terraform/assets/130571444/f89678fc-772e-4665-9280-1089db95b9b7)
+![image](https://github.com/veerakumar24/veera-jumisa/assets/130571444/5b4c78ea-41c1-4671-8a63-890a79876d58)
 
 # Deployment Process
 Here the deployment java and react application contains the ansible configuration files ex:
