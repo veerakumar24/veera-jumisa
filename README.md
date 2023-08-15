@@ -153,7 +153,7 @@ Here the deployment java and react application contains the ansible configuratio
         url: https://artifactory.mgmt.dreamteamit.in/artifactory/ems-veera/ems-v/backend/springboot-backend-100.jar
         dest: /opt/java-backend
         url_username: veerakumar
-        url_password: cmVmdGtuOjAxOjE3MjMzODg5ODM6NEVpZENCdEQ0aVRTU3lWelVla2xuRTdCaFV3
+        url_password: '{{ ( "BackendService_password") }}'
 
 ## FontendService.yaml
 
@@ -176,10 +176,10 @@ Here the deployment java and react application contains the ansible configuratio
       
       -name: Download frontendend
         get_url:
-          url: https://artifactory.mgmt.dreamteamit.in/artifactory/ems-veera/ems-v/backend/springboot-backend-100.jar
+          url: https://artifactory.mgmt.dreamteamit.in/artifactory/ems-veera/ems-v/frontend/react-hooks-25.zip
           dest: /opt/react-frontend
           url_username: veerakumar
-          url_password: nebffnenioenoencnekdenknoieh3oswiehurhuibopasobpdudhqopheopfheuiowfhpuihbuifhpuifbcwpe
+          url_password: '{{ ( "FrontendService_password") }}'
 
 ## output 
 
