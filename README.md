@@ -123,7 +123,7 @@ Here the deployment java and react application contains the ansible configuratio
 - Mainly defining the hosts and groups and Connection information.
   
       [ec2]
-      ec2_instance ansible_host=44.211.207.93
+      ec2_instance ansible_host=34.56.24.01
 
 ## Backend and Frontend Deployment File
 - In tasks folder having the backend path and frontend path wich is stored in the /opt/java-backend/ for Java Springboot and /opt/react-frontend for React Nodejs.
