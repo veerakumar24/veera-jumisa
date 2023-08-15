@@ -7,7 +7,8 @@
  - Playbooks used to automate everything form system configuration to complex multi-step process, playbooks are written in YAML format.    
  - It consists of a set of tasks used to configure a host to server. Ansible manages the machines in agent-less mannner.
 
-![image](https://github.com/veerakumar24/terraform/assets/130571444/ee24ef28-2b5b-4ffe-836e-b9dc424de744)
+![image](https://github.com/veerakumar24/veera-jumisa/assets/130571444/0e90601d-5064-4de0-acb6-bbc0dbf7a175)
+
 
 # Anisble installation
 You can install a released version of Ansible with pip or a package manager. For details on installing Ansible on a variety of platforms: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
@@ -182,4 +183,5 @@ Here the deployment java and react application contains the ansible configuratio
 
 ## output 
 
-![image](https://github.com/veerakumar24/terraform/assets/130571444/0acfdce8-3ab6-492f-a6b5-7c566acd7c92)
+![image](https://github.com/veerakumar24/veera-jumisa/assets/130571444/14453977-64be-40f5-aac0-ec3fb50c63a9)
+
