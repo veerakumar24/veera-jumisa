@@ -49,7 +49,8 @@ This project aims to streamline the deployment process of a complex web applicat
 
 # Directory Structure
 
-![image](https://github.com/veerakumar24/veera-jumisa/assets/130571444/5b4c78ea-41c1-4671-8a63-890a79876d58)
+![image](https://github.com/veerakumar24/veera-jumisa/assets/130571444/8e7c1cce-48ca-47cf-9728-37bbc23c7d45)
+
 
 # Deployment Process
 Here the deployment java and react application contains the ansible configuration files ex:
