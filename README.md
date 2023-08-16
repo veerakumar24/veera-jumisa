@@ -126,6 +126,7 @@ Here the deployment java and react application contains the ansible configuratio
       [ec2]
       ec2_instance ansible_host=34.56.24.01
 
+
 ## Backend and Frontend Deployment File
 - In tasks folder having the backend path and frontend path wich is stored in the /opt/java-backend/ for Java Springboot and /opt/react-frontend for React Nodejs.
 - In deployment process our backend and frontend code were stored in jfrog artifactory in ansible deployment stage we were using the username and token for download the build and un-zip file.
